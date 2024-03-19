@@ -6,7 +6,7 @@
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 12:37:28 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/01/13 16:58:28 by ozahidi          ###   ########.fr       */
+/*   Updated: 2024/03/19 13:50:02 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,4 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		}
 	}
 	return (dst);
-}
-
-#include  <stdio.h>
-#include  <string.h>
-int main()
-{
-	char *str = "hello";
-	// printf("%s", memcpy(str, str, 5));
-	printf("%s", ft_memmove(str, str, 5));
 }

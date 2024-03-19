@@ -6,7 +6,7 @@
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 06:57:13 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/03/17 09:12:14 by ozahidi          ###   ########.fr       */
+/*   Updated: 2024/03/19 13:55:16 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@
 #include "../ft_printf/ft_printf.h"
 #include "../libft/libft.h"
 
-void signal_handler(int signum);
+// void signal_handler(int signum);
 
 #endif
