@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_server_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:35:49 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/03/20 23:53:57 by ozahidi          ###   ########.fr       */
+/*   Updated: 2024/03/20 12:01:09 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,15 @@
 #include <stdlib.h>
 #include "ft_server.h"
 #include <string.h>
-char *str;
 
-char* add_char_to_string(char* str, char c)
-{
-    int len = ft_strlen(str);
-    char* new_str = malloc((len + 2) * sizeof(char)); // Allocate memory for new string
-
-    if (new_str == NULL) {
-        return NULL; // Return NULL if memory allocation failed
-    }
-
-    ft_strlcpy(new_str, str,len); // Copy the original string to the new string
-    new_str[len] = c; // Add the new character
-    new_str[len + 1] = '\0'; // Add the null terminator
-
-    return new_str;
-}
 void signal_handler(int signum, siginfo_t *info, void *context)
 {
 	static int i = 0;
-	static int j = 0;
 	static int c = 0;
 	static int pid_p1;
 	static int pid_p2;
 
-    // 1100.0000
+	c = c << 1;
 	(void)context;
 	pid_p1 = info->si_pid;
 	if (pid_p1 !=  pid_p2)
@@ -49,47 +32,19 @@ void signal_handler(int signum, siginfo_t *info, void *context)
 		pid_p2 = pid_p1;
 		c = 0;
 		i = 0;
-		j = 0;
 	}
-	if (i < 32)
-	{
-		c = c << 1;
-		if (signum == SIGUSR1)
-		{
-			// ft_printf("1");
-			c = c | 1;
-		}
-	// else if (signum == SIGUSR2)
-	}
+	if (signum == SIGUSR1)
+		c = c | 1;
 	i++;
-	if (i == 32)
+	if (i == 8)
 	{
-		// ft_printf("0");
-		ft_printf("Len : [%d]", c);
+		// if (c == '\0')
+			// kill(pid_p1, SIGUSR1);
+		write(1, &c, 1);
 		c = 0;
 		i = 0;
 	}
-	if (i >= 32)
-	{
-			c = c << 1;
-			if (signum == SIGUSR1)
-			{
-				c = c | 1;
-				ft_printf("1");
-			}
-			else
-				ft_printf("0");
-			// str = add_char_to_string(str, c);
-			j++;
-			if (j == 8)
-			{
-				ft_printf("khouna : [%c]", c);
-				j = 0;
-				c = 0;
-			}
-			i++;
-	}
-	usleep(400);
+	usleep(100);
 }
 
 int main()

@@ -3,7 +3,6 @@
 #include <signal.h>
 #include <stdlib.h>
 #include <string.h>
-
 void	*ft_memset(void *b, int c, size_t len)
 {
 	unsigned char	*str;
@@ -18,58 +17,57 @@ void	*ft_memset(void *b, int c, size_t len)
 	}
 	return (b);
 }
-
-void print_bit(unsigned char octet)
+void send_len(int octet)
 {
-  unsigned char n;
+  int n;
+  unsigned char *set;
   int kill_result;
-  int tab[8];
+  int tab[32];
   int i;
 
-  n = 128;
+  n = 512;
   i = 0;
-  ft_memset(tab, 0, 8);
-  while ( i < 8 && n != 0)
+  ft_memset(tab, 1, 32);
+  
+  while (i < 32)
   {
-    if ((octet - n) >= 0)
-    {
-      tab[i] = 1;
-      //   kill_result = kill(pid, SIGUSR1); //sends signal SIGUSR2 to a server
-      //   if (kill_result == -1) {
-      //       perror("Error sending SIGUSR1");
-      //   }
-      //   usleep(500);
-      octet -= n;
-    }
-    else
-    {
-      tab[i] = 0;
-        // kill_result = kill(pid, SIGUSR2); //sends signal SIGUSR2 to a server
-        // if (kill_result == -1) {//check if the signal send
-        //     perror("Error sending SIGUSR2");
-        // }
-        // usleep(500);
-    }
+    tab[i] = n % 2;
     if(octet == 0 && n == 1)
       break;
     n /= 2;
     i++;
   }
   i = 0;
-  while (i <= 7)
+  while (i < 32)
   {
-    if (tab[i] >= 0)
-        // kill(pid, SIGUSR2);
-        printf("%d", tab[i]);
-    else if (tab[i] >= 1)
-        // kill(pid, SIGUSR1);
-        printf("%d", tab[i]);
-      usleep(100);
+    if (tab[i] == 0)
+    {
+      printf("0");
+    }
+    else if (tab[i] == 1)
+    {
+      printf("1");
+    }
     i++;
+    // usleep(400);
   }
 }
-
+void print_binary(int n, int depth) {
+  int tab[32];
+  ft_memset(tab, 1, 32);
+    if (depth == 0) {
+        return;
+    }
+    tab[depth - 1] = n % 2;
+    printf("tab [%d] == %d\n" , depth - 1, tab[depth - 1]);
+    print_binary(n / 2, depth - 1);
+}
 int main()
 {
-    print_bit(128);
+    // print_bit(128);
+  // send_len(1);
+  int num = 255;
+  static int i = 0;
+    print_binary(num, 32);
+
 }

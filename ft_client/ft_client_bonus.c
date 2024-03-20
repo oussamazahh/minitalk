@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_client.c                                        :+:      :+:    :+:   */
+/*   ft_client_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:39:40 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/03/20 23:52:28 by ozahidi          ###   ########.fr       */
+/*   Updated: 2024/03/20 11:58:40 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,10 @@
 #include <unistd.h>
 #include "ft_client.h"
 
-int size;
-void fil_tab_len(int n, int depth , int tab[32]) {
-    if (depth == 0) {
-        return;
-    }
-    tab[depth - 1] = n % 2;
-    // if (tab[depth - 1] == 0)
-    //   kill(pid, SIGUSR2);
-    // if (tab[depth - 1] == 1)
-    //   kill(pid, SIGUSR1);
-    // usleep(400);
-    fil_tab_len(n / 2, depth - 1, tab);
-    // printf("tab [%d] == %d\n" , depth - 1, tab[depth - 1]);
+void handle_sigusr1(int signum)
+{
+	if (signum == SIGUSR1)
+		write(1, "sucess", 6);
 }
 
 void send_bit(unsigned char octet, pid_t pid)
@@ -74,39 +65,21 @@ void send_bit(unsigned char octet, pid_t pid)
         }
     }
     i++;
-    usleep(400);
-  }
-}
-
-void send_len(int tab[32], pid_t pid)
-{
-  int i = 0;
-  while (i < 32)
-  {
-    if (tab[i] == 0)
-      kill(pid, SIGUSR2);
-    if (tab[i] == 1)
-      kill(pid, SIGUSR1);
-    usleep(1000);
-    i++;
+    usleep(42);
   }
 }
 
 int main(int argc, char *argv[])
 {
-  int tab [32];
+      int i = 0;
     pid_t pid = ft_atoi(argv[1]);
     if (pid > 1)
     {
       printf("PID %d\n",pid);
-      int i = 0;
-      ft_memset(tab, 1, 32);
-      int len = ft_strlen(argv[2]);
-      fil_tab_len(len, 32, tab);
-      send_len(tab, pid);
       while (argv[2][i])
         send_bit(argv[2][i++], pid);
     usleep(1000);
+      // signal(SIGUSR1, handle_sigusr1);
     }
     else
       write(1, "Don't play with me", 18);
