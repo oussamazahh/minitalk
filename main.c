@@ -62,12 +62,37 @@ void print_binary(int n, int depth) {
     printf("tab [%d] == %d\n" , depth - 1, tab[depth - 1]);
     print_binary(n / 2, depth - 1);
 }
+
+char* add_char_to_string(char* str, char c)
+{
+    int len = strlen(str);
+    char* new_str = malloc((len + 2) * sizeof(char)); // Allocate memory for new string
+
+    if (new_str == NULL) {
+        return NULL; // Return NULL if memory allocation failed
+    }
+
+    strcpy(new_str, str); // Copy the original string to the new string
+    new_str[len] = c; // Add the new character
+    new_str[len + 1] = '\0'; // Add the null terminator
+
+    return new_str;
+}
 int main()
 {
     // print_bit(128);
   // send_len(1);
-  int num = 255;
-  static int i = 0;
-    print_binary(num, 32);
+  char *str = malloc(5);
+  str[0] = 'a';
+  str[1] = 'a';
+  str[2] = 'a';
+  str[3] = 'a';
+  str[4] = '\0';
 
+  printf("Before : %s\n", str);
+  str = add_char_to_string(str, '8');
+  str = add_char_to_string(str, '8');
+  str = add_char_to_string(str, '8');
+  printf("After : %s\n", str);
+  free (str);
 }

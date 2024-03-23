@@ -6,7 +6,7 @@
 #    By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/16 23:02:59 by ozahidi           #+#    #+#              #
-#    Updated: 2024/03/20 17:22:08 by ozahidi          ###   ########.fr        #
+#    Updated: 2024/03/22 22:42:26 by ozahidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CLIENTNAME = client
 
 # BCLIENTNAME = bclient
 
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 # libft = make -c libft/
 

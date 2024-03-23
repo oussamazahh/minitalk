@@ -6,7 +6,7 @@
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:35:49 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/03/20 23:53:57 by ozahidi          ###   ########.fr       */
+/*   Updated: 2024/03/23 00:55:16 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,88 @@
 #include <stdlib.h>
 #include "ft_server.h"
 #include <string.h>
-char *str;
 
-char* add_char_to_string(char* str, char c)
+char	*str;
+
+char	*ft_strcpy(char *dest, char *src)
 {
-    int len = ft_strlen(str);
-    char* new_str = malloc((len + 2) * sizeof(char)); // Allocate memory for new string
+	int	i;
 
-    if (new_str == NULL) {
-        return NULL; // Return NULL if memory allocation failed
-    }
-
-    ft_strlcpy(new_str, str,len); // Copy the original string to the new string
-    new_str[len] = c; // Add the new character
-    new_str[len + 1] = '\0'; // Add the null terminator
-
-    return new_str;
+	i = 0;
+	if (!src)
+		return (NULL);
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
+
+char	*add_char_to_string(char* str, char ch)
+{
+	int		length;
+	char	*new_str;
+
+	length = 0;
+	if (str)
+		length = ft_strlen(str);
+	new_str = (char *)malloc((length + 2) * sizeof(char)); // +2 for the new character and the null-terminating character
+	if (new_str == NULL)
+		return str;
+	if (str)
+	{
+		ft_strcpy(new_str, str); // copy the original string to the new string
+		free(str); // free the original string
+	}
+	new_str[length] = ch; // add the new character
+	new_str[length + 1] = '\0'; // null-terminate the new string
+	return new_str;
+}
+
+// void 		print_str(int signum, char *ch, int *j, int *i)
+// {
+// 	*ch = *ch << 1;
+// 	if (signum == SIGUSR1)
+// 	{
+// 		*ch = *ch | 1;
+// 		// ft_printf("1");
+// 	}
+// 	// else
+// 	// 	ft_printf("0");
+// 	j++;
+// 	if (*j == 8)
+// 	{
+// 		// ft_printf("\n%c", ch);
+// 		str = add_char_to_string(str, *ch);
+// 		*j = 0;
+// 		*ch = 0;
+// 		*i = 33;
+// 	}
+// }
+
 void signal_handler(int signum, siginfo_t *info, void *context)
 {
-	static int i = 0;
-	static int j = 0;
-	static int c = 0;
+	static long long int i;
+	static int j;
+	static int c ;
+	static char ch;
 	static int pid_p1;
 	static int pid_p2;
 
-    // 1100.0000
 	(void)context;
 	pid_p1 = info->si_pid;
 	if (pid_p1 !=  pid_p2)
 	{
 		pid_p2 = pid_p1;
+		free(str);
+		str = NULL;	
 		c = 0;
 		i = 0;
 		j = 0;
 	}
-	if (i < 32)
+	if (i < 32 && j == 0)
 	{
 		c = c << 1;
 		if (signum == SIGUSR1)
@@ -59,37 +105,60 @@ void signal_handler(int signum, siginfo_t *info, void *context)
 			// ft_printf("1");
 			c = c | 1;
 		}
+		i++;
 	// else if (signum == SIGUSR2)
-	}
-	i++;
-	if (i == 32)
-	{
-		// ft_printf("0");
-		ft_printf("Len : [%d]", c);
-		c = 0;
-		i = 0;
 	}
 	if (i >= 32)
 	{
-			c = c << 1;
-			if (signum == SIGUSR1)
+		if (j == -1)
+			j = 0;
+		// ft_printf("0");
+		if (i == 32)
+		{
+			ft_printf("Len : [%d]\n", c);
+			if (j == 0 && i == 32)
 			{
-				c = c | 1;
-				ft_printf("1");
+				j = -1;
+				i++;
 			}
-			else
-				ft_printf("0");
-			// str = add_char_to_string(str, c);
-			j++;
-			if (j == 8)
-			{
-				ft_printf("khouna : [%c]", c);
-				j = 0;
-				c = 0;
-			}
-			i++;
+			// i++;
+		}
+		// c = 0;
+
+		if (j >= 0 && i > 32)
+		{
+			// if (i == 33)
+				// ft_printf("i >> = %d | j >>= %d\n",i, j);
+				ch = ch << 1;
+				if (signum == SIGUSR1)
+				{
+					ch = ch | 1;
+					// ft_printf("1");
+				}
+				// else
+				// 	ft_printf("0");
+				j++;
+				if (j == 8)
+				{
+					// ft_printf("\n%c", ch);
+					str = add_char_to_string(str, ch);
+					j = 0;
+					ch = 0;
+					i = 33;
+				}
+				if (ft_strlen(str) == c)
+				{
+					ft_printf("STR : [%s]", str);
+					i = 0;
+					j = 0;
+					c = 0;
+					ch = 0;
+					free(str);
+					str = NULL;
+				}
+		}
 	}
-	usleep(400);
+	// usleep(500);
 }
 
 int main()

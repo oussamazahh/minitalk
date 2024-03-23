@@ -6,7 +6,7 @@
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 09:44:12 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/01/09 10:50:49 by ozahidi          ###   ########.fr       */
+/*   Updated: 2024/03/21 15:56:01 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (i);
 	while (*s++)
 		i++;
 	return (i);
