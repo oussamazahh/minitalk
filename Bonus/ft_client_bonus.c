@@ -1,19 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_client.c                                        :+:      :+:    :+:   */
+/*   ft_client_Bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 11:39:40 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/03/23 00:15:10 by ozahidi          ###   ########.fr       */
+/*   Created: 2024/03/23 16:39:50 by ozahidi           #+#    #+#             */
+/*   Updated: 2024/03/24 00:44:10 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <signal.h>
-#include <unistd.h>
-#include "ft_client.h"
+#include "ft_client_bonus.h"
 
 void	fil_tab_len(int n, int depth, int tab[32])
 {
@@ -35,13 +32,13 @@ void	__send(int *tab, pid_t pid)
 		{
 			kill_result = kill(pid, SIGUSR2);
 			if (kill_result == -1)
-				perror("Error sending SIGUSR2");
+				ft_printf("Error sending SIGUSR2");
 		}
 		else if (tab[i] == 1)
 		{
 			kill_result = kill(pid, SIGUSR1);
 			if (kill_result == -1)
-				perror("Error sending SIGUSR1");
+				ft_printf("Error sending SIGUSR1");
 		}
 		i++;
 		usleep(200);
@@ -97,6 +94,7 @@ int	main(int argc, char *argv[])
 	int		i;
 	int		len;
 
+	(void) argc;
 	pid = ft_atoi(argv[1]);
 	if (pid > 1)
 	{
@@ -107,6 +105,7 @@ int	main(int argc, char *argv[])
 		ft_printf("Len : %d\n", len);
 		fil_tab_len(len, 32, tab);
 		send_len(tab, pid);
+		signal(SIGUSR1, handler);
 		while (argv[2][i])
 			send_bit(argv[2][i++], pid);
 		usleep(1000);

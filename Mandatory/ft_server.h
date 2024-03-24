@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_server.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/04 09:44:12 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/03/23 23:04:35 by ozahidi          ###   ########.fr       */
+/*   Created: 2024/03/17 06:57:13 by ozahidi           #+#    #+#             */
+/*   Updated: 2024/03/23 14:25:26 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FT_SERVER_H
+# define FT_SERVER_H
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
+# include <stdarg.h>
+# include <unistd.h>
+# include <unistd.h>
+# include "../ft_printf/ft_printf.h"
+# include "../libft/libft.h"
 
-	i = 0;
-	if (!s)
-		return (i);
-	while (*s++)
-		i++;
-	return (i);
-}
+void	__fil_len(int *signum, int *c, int *i);
+char	*add_char_to_string(char *str, char ch);
+char	*ft_strcpy(char *dest, char *src);
+#endif

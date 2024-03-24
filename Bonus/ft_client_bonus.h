@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_client_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/04 09:44:12 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/03/23 23:04:35 by ozahidi          ###   ########.fr       */
+/*   Created: 2024/03/23 16:39:59 by ozahidi           #+#    #+#             */
+/*   Updated: 2024/03/24 00:36:25 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FT_CLIENT_BONUS_H
+# define FT_CLIENT_BONUS_H
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
+# include <stdarg.h>
+# include <unistd.h>
+# include <signal.h>
+# include "../ft_printf/ft_printf.h"
+# include "../libft/libft.h"
 
-	i = 0;
-	if (!s)
-		return (i);
-	while (*s++)
-		i++;
-	return (i);
-}
+void	signal_handler(int signum);
+void	handler(int signum);
+
+#endif
