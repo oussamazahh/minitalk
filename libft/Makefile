@@ -6,7 +6,7 @@
 #    By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/16 12:44:10 by ozahidi           #+#    #+#              #
-#    Updated: 2024/03/16 12:48:26 by ozahidi          ###   ########.fr        #
+#    Updated: 2024/05/02 15:32:16 by ozahidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,21 +36,21 @@ OBJS = ${SRCS:.c=.o}
 BOBJS= ${BSRCS:.c=.o}
 
 %o : %c libft.h
-	${CC} -o $@ ${CFLAGS} -c $<
+	@${CC} -o $@ ${CFLAGS} -c $<
 
 all : ${NAME}
 
 ${NAME} : ${OBJS}
-	${AR} rcs ${NAME} ${OBJS}
+	@${AR} rcs ${NAME} ${OBJS}
 
 bonus : ${BOBJS}
-	${AR} rcs ${NAME} ${BOBJS}
+	@${AR} rcs ${NAME} ${BOBJS}
 
 clean :
-	rm -rf ${OBJS} ${BOBJS}
+	@rm -rf ${OBJS} ${BOBJS}
 
 fclean : clean
-	rm -rf ${NAME}
+	@rm -rf ${NAME}
 
 re : fclean all
 

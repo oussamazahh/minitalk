@@ -6,7 +6,7 @@
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 16:39:59 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/04/23 11:54:55 by ozahidi          ###   ########.fr       */
+/*   Updated: 2024/05/08 17:47:02 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <unistd.h>
 # include <signal.h>
 
-void	signal_handler(int signum);
 void	handler(int signum);
 
 #endif

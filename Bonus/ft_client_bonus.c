@@ -6,7 +6,7 @@
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 16:39:50 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/04/23 11:51:52 by ozahidi          ###   ########.fr       */
+/*   Updated: 2024/05/08 17:42:32 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ int	main(int argc, char *argv[])
 		signal(SIGUSR1, handler);
 		while (argv[2][i])
 			send_bit(argv[2][i++], pid);
-		usleep(1000);
+		while (1)
+			pause ();
 	}
 	else
 		write(1, "Don't play with me", 18);

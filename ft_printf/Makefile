@@ -6,7 +6,7 @@
 #    By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 14:25:23 by ozahidi           #+#    #+#              #
-#    Updated: 2024/03/23 16:36:44 by ozahidi          ###   ########.fr        #
+#    Updated: 2024/05/02 15:31:56 by ozahidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,16 +26,16 @@ OBJS = ${SRCS:.c=.o}
 all : ${NAME}
 
 ${NAME} : ${OBJS}
-	${AR} ${NAME} ${OBJS}
+	@${AR} ${NAME} ${OBJS}
 
 %.o: %.c ft_printf.h
-	${CC} -o $@ -c $<
+	@${CC} -o $@ -c $<
 
 clean:
-	rm -rf ${OBJS}
+	@rm -rf ${OBJS}
 
 fclean: clean
-	rm -rf ${NAME}
+	@rm -rf ${NAME}
 
 re: fclean all
 

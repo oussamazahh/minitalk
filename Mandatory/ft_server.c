@@ -6,7 +6,7 @@
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:35:49 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/04/27 21:10:23 by ozahidi          ###   ########.fr       */
+/*   Updated: 2024/05/07 17:40:03 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	print_str(int *signum, char *ch, int arr[3], int *c)
 	}
 	if (i == *c)
 	{
-		ft_printf("%s\n", g_str);
+		ft_printf("%s", g_str);
 		i = 0;
 		intializ_var(arr, c, ch, arr + 1);
 	}
